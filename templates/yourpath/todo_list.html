@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<!-- this is my bootstrap file location 
+     download the bootstrap file first and change the location to yours-->
+<link rel="stylesheet" href="{% static 'first_project/bootstrap.min.css' %}">
+
+<div class="row mt-4">
+	<div class="col">
+		<h2>Add Item</h2>
+    <form action="{% url 'add-todo' %}" method="post" class="form-inline">
+      {% csrf_token %}
+		  <input type="text" required name="content" class="form-control mb-2 mr-sm-2" placeholder="type here...">
+      <button type="submit" class="btn btn-primary mb-2">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div style="height:550px;width:auto;overflow-x:hidden;">
+{% for todo_item in todo_items %}
+<form action="{% url 'delete-todo' %}" method="POST">
+  {% csrf_token %}
+  <div class="row mt-4">
+    <div class="col">
+      <ul class="list-group">
+        <li class="list-group-item"><input name="id_todo" value="{{ todo_item.id_todo }}" type="hidden"> -> {{ forloop.counter }}. {{ todo_item.text }}
+            <div class="float">
+                <input type="submit" class="btn btn-sm btn-danger" value="Done">
+            </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>
+{% endfor %}
+</div>
+
+<a href="{% url 'history-todo' %}" class="btn btn-primary">History List</a>
+
+</html>
+
+{% if messages %}
+    {% for message in messages %}
+<script>
+  alert("{{ message }}");
+</script>
+    {% endfor %}
+{% endif %}
