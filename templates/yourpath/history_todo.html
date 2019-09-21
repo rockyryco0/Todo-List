@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<!-- this is my bootstrap file location 
+     download the bootstrap file first and change the location to yours-->
+<link rel="stylesheet" href="{% static 'first_project/bootstrap.min.css' %}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>History</title>
+</head>
+
+<body>
+<center>
+<label class="btn btn-primary">History List</label><hr>
+    {% for data in json_list.list %}
+        {{ forloop.counter }}. {{ data.content }} (added at {{ data.added_date }})<br>
+    {% endfor %}
+</center>
+<a href="{% url 'clear-list' %}" class="btn btn-primary">Clear history</a> |
+<a href="{% url 'todo-list' %}" class="btn btn-primary">Back</a>
+</body>
+</html>
