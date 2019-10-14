@@ -5,20 +5,34 @@
 <!-- this is my bootstrap file location 
      download the bootstrap file first and change the location to yours-->
 <link rel="stylesheet" href="{% static 'first_project/bootstrap.min.css' %}">
-
+     
+<style>
+.new5 {
+  border: 10px solid rgb(39, 100, 230);
+  border-radius: 5px;
+  width: 1000px;
+}</style>
+     
 <head>
     <meta charset="UTF-8">
     <title>History</title>
 </head>
-
+     
 <body>
 <center>
-<label class="btn btn-primary">History List</label><hr>
+     <br>
+<label class="btn btn-primary">History List</label><hr class="new5">
     {% for data in json_list.list %}
         {{ forloop.counter }}. {{ data.content }} (added at {{ data.added_date }})<br>
     {% endfor %}
 </center>
-<a href="{% url 'clear-list' %}" class="btn btn-primary">Clear history</a> |
-<a href="{% url 'todo-list' %}" class="btn btn-primary">Back</a>
+<br>
+<div class="row">
+    <div class="col-sm-2"></div>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+             <div class="btn-group mr-2" role="group" aria-label="First group"><a href="{% url 'first_project-clear-list' %}" class="btn btn-primary">Clear history</a></div>
+             <div class="btn-group mr-2" role="group" aria-label="Second group"><a href="{% url 'first_project-todo-list' %}" class="btn btn-primary">Back</a></div>
+        </div>
+</div>
 </body>
 </html>
